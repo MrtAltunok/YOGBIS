@@ -138,7 +138,7 @@ namespace YOGBIS.BusinessEngine.Implementaion
         #region FotoURLGetirUlkeId(Guid id)
         public Result<string[]> FotoURLGetirUlkeId(Guid ulkeId)
         {
-            
+            List<string> dizi = new     List<string>();
             var data = _unitOfWork.ulkelerRepository.GetFirstOrDefault(u => u.UlkeId == ulkeId, includeProperties: "FotoGaleri");
             if (data != null)
             {
@@ -148,10 +148,10 @@ namespace YOGBIS.BusinessEngine.Implementaion
                     var foto = _unitOfWork.fotoGaleriRepository.GetFirstOrDefault(u => u.FotoGaleriId == item.FotoGaleriId);
                     if (foto != null)
                     {
-                        string fotourl = foto.FotoURL.ToString();
+                        dizi.Add(foto.FotoURL.ToString());
                     }
                 }
-                return new Result<string[]>(true, ResultConstant.RecordRemoveSuccessfully);
+                return new Result<dizi>(true, ResultConstant.RecordRemoveSuccessfully);
             }
             else
             {
